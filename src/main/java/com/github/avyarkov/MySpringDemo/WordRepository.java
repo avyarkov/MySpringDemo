@@ -1,6 +1,7 @@
 package com.github.avyarkov.MySpringDemo;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface WordRepository extends CrudRepository<Word, String> {
-}
+@Repository
+public interface WordRepository extends CrudRepository<WordWithWordcount, String> {}

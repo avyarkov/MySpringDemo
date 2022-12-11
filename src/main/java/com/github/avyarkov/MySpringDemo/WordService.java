@@ -3,19 +3,26 @@ package com.github.avyarkov.MySpringDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class WordService {
-    WordRepository wordRepository;
+    private final WordRepository wordRepository;
 
     @Autowired
-    public WordService(WordRepository wordRepository) {
+    WordService(WordRepository wordRepository) {
         this.wordRepository = wordRepository;
-        wordRepository.save(new Word("_1_one_", 1));
-        wordRepository.save(new Word("_2_two_", 2));
-        wordRepository.save(new Word("_3_three_", 3));
+        wordRepository.save(new WordWithWordcount("_1_one_", 1));
+        wordRepository.save(new WordWithWordcount("_2_two_", 2));
+        wordRepository.save(new WordWithWordcount("_3_three_", 3));
     }
 
-    public String getWordsList() {
-        return wordRepository.findAll().toString();
+    Map<String, Integer> getWordToWordcountMap() {
+        Map<String, Integer> wordToWordcount = new HashMap<>();
+        for (var wordWithWordcount : wordRepository.findAll()) {
+            wordToWordcount.put(wordWithWordcount.word, wordWithWordcount.wordcount);
+        }
+        return wordToWordcount;
     }
 }

@@ -4,23 +4,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Word {
+public class WordWithWordcount {
     @Id String word;
-    int wordCount;
+    int wordcount;
 
-    public Word() {
+    public WordWithWordcount() {
     }
 
-    Word(String word, int wordCount) {
+    WordWithWordcount(String word, int wordcount) {
         this.word = word;
-        this.wordCount = wordCount;
+        this.wordcount = wordcount;
     }
 
     @Override
     public String toString() {
-        return "Word{" +
+        return "WordWithWordcount{" +
             "word='" + word + '\'' +
-            ", wordCount=" + wordCount +
+            ", wordcount=" + wordcount +
             '}';
     }
 }
