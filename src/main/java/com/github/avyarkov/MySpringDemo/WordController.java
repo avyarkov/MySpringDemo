@@ -22,4 +22,9 @@ public class WordController {
     public String getWordsWithWordCounts() throws JsonProcessingException {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(wordService.getWordToWordcountMap());
     }
+
+    @GetMapping(path = "/add")
+    public void addWord(@RequestParam String word) {
+        wordService.addWord(word);
+    }
 }

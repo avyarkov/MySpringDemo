@@ -5,8 +5,8 @@ import jakarta.persistence.Id;
 
 @Entity
 public class WordWithWordcount {
-    @Id String word;
-    int wordcount;
+    @Id private String word;
+    private int wordcount;
 
     public WordWithWordcount() {
     }
@@ -14,6 +14,18 @@ public class WordWithWordcount {
     WordWithWordcount(String word, int wordcount) {
         this.word = word;
         this.wordcount = wordcount;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public int getWordcount() {
+        return wordcount;
+    }
+
+    void incrementWordcount() {
+        wordcount++;
     }
 
     @Override

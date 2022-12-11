@@ -13,16 +13,19 @@ public class WordService {
     @Autowired
     WordService(WordRepository wordRepository) {
         this.wordRepository = wordRepository;
-        wordRepository.save(new WordWithWordcount("_1_one_", 1));
-        wordRepository.save(new WordWithWordcount("_2_two_", 2));
-        wordRepository.save(new WordWithWordcount("_3_three_", 3));
     }
 
-    Map<String, Integer> getWordToWordcountMap() {
-        Map<String, Integer> wordToWordcount = new HashMap<>();
+    public Map<String, Integer> getWordToWordcountMap() {
+        Map<String, Integer> wordToWordcountMap = new HashMap<>();
         for (var wordWithWordcount : wordRepository.findAll()) {
-            wordToWordcount.put(wordWithWordcount.word, wordWithWordcount.wordcount);
+            wordToWordcountMap.put(wordWithWordcount.getWord(), wordWithWordcount.getWordcount());
         }
-        return wordToWordcount;
+        return wordToWordcountMap;
+    }
+
+    public void addWord(String word) {
+        var wordWithWordcount = wordRepository.findById(word).orElse(new WordWithWordcount(word, 0));
+        wordWithWordcount.incrementWordcount();
+        wordRepository.save(wordWithWordcount);
     }
 }

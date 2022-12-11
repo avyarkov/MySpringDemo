@@ -1,0 +1,8 @@
+###
+GET http://localhost:8080/addWord?word=apple
+
+###
+POST http://localhost:8080/add
+Content-Type: application/x-www-form-urlencoded
+
+word=zebra
