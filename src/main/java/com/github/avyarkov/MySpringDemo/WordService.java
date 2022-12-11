@@ -1,15 +1,21 @@
 package com.github.avyarkov.MySpringDemo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class WordService {
+    WordRepository wordRepository;
 
-    private List wordsList = List.of("apple", "book", "car", "door",     "zebra");
+    @Autowired
+    public WordService(WordRepository wordRepository) {
+        this.wordRepository = wordRepository;
+        wordRepository.save(new Word("_1_one_", 1));
+        wordRepository.save(new Word("_2_two_", 2));
+        wordRepository.save(new Word("_3_three_", 3));
+    }
 
-    public List<String> getWordsList() {
-        return wordsList;
+    public String getWordsList() {
+        return wordRepository.findAll().toString();
     }
 }
