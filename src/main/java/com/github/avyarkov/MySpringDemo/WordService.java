@@ -3,8 +3,8 @@ package com.github.avyarkov.MySpringDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class WordService {
@@ -16,7 +16,7 @@ public class WordService {
     }
 
     public Map<String, Integer> getWordToWordcountMap() {
-        Map<String, Integer> wordToWordcountMap = new HashMap<>();
+        Map<String, Integer> wordToWordcountMap = new TreeMap<>();
         for (var wordWithWordcount : wordRepository.findAll()) {
             wordToWordcountMap.put(wordWithWordcount.getWord(), wordWithWordcount.getWordcount());
         }
