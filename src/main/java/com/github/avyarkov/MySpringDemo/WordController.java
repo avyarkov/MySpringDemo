@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 @RequestMapping
 public class WordController {
@@ -33,6 +35,14 @@ public class WordController {
     public ModelAndView addWordGetWithParam(@RequestParam String word) {
         wordService.addWord(word);
         return new ModelAndView("home");
+    }
+
+    @GetMapping(path = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dto<Dto<String>> addWordGetWithParam() {
+        String s = "hello";
+        List<String> a = List.of("a", "b");
+        Dto<String> b = Dto.from(s, a, s);
+        return Dto.from(s, a, b);
     }
 
     @GetMapping(path = "/add")
