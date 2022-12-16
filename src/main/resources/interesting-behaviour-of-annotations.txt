@@ -1,0 +1,5 @@
+interesting behaviour of annotations:
+@RequestParam(defaultValue = "") List<String> warnings - defaults to empty list
+Jackson requires at least one canonically named getter or @JsonProperty or @JsonGetter("name"), otherwise throws an exception
+@JsonInclude(JsonInclude.Include.NON_EMPTY) - excludes null or empty
+@JsonPropertyOrder({...}) - serializes mentioned parameters in order first, other parameters not in order after

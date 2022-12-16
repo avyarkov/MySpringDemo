@@ -1,25 +1,46 @@
 package com.github.avyarkov.MySpringDemo;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
+@JsonPropertyOrder({"status", "data", "string", "warnings"})
 public class Dto<T> {
-    @JsonProperty
-    private String s;
+    public enum Status {SUCCESS, ERROR}
 
-    @JsonProperty
-    private List<String> a;
+    private final Status status;
 
-    @JsonProperty
-    private T b;
-
-    public static <T> Dto<T> from(String s, List<String> a, T b) {
-        Dto<T> dto = new Dto<>();
-        dto.s = s;
-        dto.a = a;
-        dto.b = b;
-        return dto;
+    @JsonGetter("status")
+    private String statusAsString() {
+        return switch (status) {
+            case SUCCESS -> "success";
+            case ERROR -> "error";
+        };
     }
 
+    @JsonProperty
+    private T data;
+
+    @JsonProperty
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<String> warnings;
+
+    @JsonProperty
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private String string;
+
+    public Dto(Status status, T data, String string, List<String> warnings) {
+        this.status = status;
+        this.data = data;
+        this.string = string;
+        this.warnings = warnings;
+    }
+
+    public static <T> Dto<T> success(T data, String string, List<String> warnings) {
+        return new Dto<>(Status.SUCCESS, data, string, warnings);
+    }
 }

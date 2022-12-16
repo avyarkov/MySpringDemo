@@ -37,14 +37,6 @@ public class WordController {
         return new ModelAndView("home");
     }
 
-    @GetMapping(path = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Dto<Dto<String>> addWordGetWithParam() {
-        String s = "hello";
-        List<String> a = List.of("a", "b");
-        Dto<String> b = Dto.from(s, a, s);
-        return Dto.from(s, a, b);
-    }
-
     @GetMapping(path = "/add")
     public ModelAndView addWordGet() {
         return new ModelAndView("addWordForm");
@@ -54,5 +46,14 @@ public class WordController {
     public ModelAndView addWordPost(@RequestParam(name = "word") String word) {
         wordService.addWord(word);
         return new ModelAndView("home");
+    }
+
+
+    @GetMapping(path = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dto<String> addWordGetWithParam(
+        @RequestParam(defaultValue = "") String string,
+        @RequestParam(defaultValue = "") List<String> warnings)
+    {
+        return Dto.success("data", string, warnings);
     }
 }

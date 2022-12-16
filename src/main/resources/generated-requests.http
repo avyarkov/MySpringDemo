@@ -6,3 +6,9 @@ POST http://localhost:8080/add
 Content-Type: application/x-www-form-urlencoded
 
 word=zebra
+###
+GET localhost:8080/dto?warnings=wow&warnings=lol&string=string&warnings=kek
+###
+GET localhost:8080/dto?warnings=wow&warnings=lol&warnings=kek
+###
+GET localhost:8080/dto
