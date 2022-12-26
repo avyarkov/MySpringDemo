@@ -58,8 +58,7 @@ public class WordController {
     }
 
     @PostMapping(path = "/request", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String request(@RequestBody Request request)
-    {
-        return request.toString();
+    public String request(@RequestBody Request request) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(request);
     }
 }

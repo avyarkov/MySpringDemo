@@ -10,3 +10,5 @@ Jackson requires at least one canonically named getter or @JsonProperty or @Json
 
 @RequestBody deserialized from JSON uses Jackson that sets @JsonProperty variables:
     int to 0, boolean to false, objects to null
+
+@JsonSetter works in deserialization for fields without @JsonProperty, but they won't be shown after serialization
