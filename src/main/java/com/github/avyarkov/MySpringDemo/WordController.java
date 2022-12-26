@@ -50,10 +50,16 @@ public class WordController {
 
 
     @GetMapping(path = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Dto<String> addWordGetWithParam(
+    public Dto<String> dto(
         @RequestParam(defaultValue = "") String string,
         @RequestParam(defaultValue = "") List<String> warnings)
     {
         return Dto.success("data", string, warnings);
+    }
+
+    @PostMapping(path = "/request", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String request(@RequestBody Request request)
+    {
+        return request.toString();
     }
 }
