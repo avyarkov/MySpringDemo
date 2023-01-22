@@ -1,0 +1,16 @@
+###
+GET localhost:8080/dto
+###
+GET localhost:8080/dto?warnings=wow&warnings=lol&string=string&warnings=kek
+###
+GET localhost:8080/dto?warnings=wow&warnings=lol&warnings=kek
+###
+POST http://localhost:8080/request
+Content-Type: application/json
+
+{
+  "num": "566",
+  "string": "hello",
+  "bool": "realTrue"
+}
+
