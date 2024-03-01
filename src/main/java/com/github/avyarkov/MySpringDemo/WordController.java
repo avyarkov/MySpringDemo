@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+import static java.util.concurrent.CompletableFuture.completedFuture;
 
 @Controller
 @RequestMapping
@@ -55,11 +58,14 @@ public class WordController {
 
     @GetMapping(path = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Dto<String> dto(
+    public CompletableFuture<?> dto(
         @RequestParam(defaultValue = "") String string,
         @RequestParam(defaultValue = "") List<String> warnings)
     {
-        return Dto.success("data", string, warnings);
+        if (!string.equals("returnOnlyString")) {
+            return completedFuture(string);
+        }
+        return completedFuture(Dto.success("data", string, warnings));
     }
 
     @PostMapping(path = "/request", produces = MediaType.APPLICATION_JSON_VALUE)
