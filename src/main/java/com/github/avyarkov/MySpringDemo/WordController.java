@@ -54,6 +54,7 @@ public class WordController {
 
 
     @GetMapping(path = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public Dto<String> dto(
         @RequestParam(defaultValue = "") String string,
         @RequestParam(defaultValue = "") List<String> warnings)
@@ -62,6 +63,7 @@ public class WordController {
     }
 
     @PostMapping(path = "/request", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public String request(@RequestBody Request request) throws JsonProcessingException {
         return objectMapper.writeValueAsString(request);
     }
